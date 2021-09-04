@@ -88,6 +88,9 @@
         </ul>
     </li>
     <p> </p>
+
+    
+   
   </ul>
   <p><a name="third_task"></a></p>
     <table border="1">
@@ -98,11 +101,11 @@
       <th>Официальный курс</th>
      </tr>
      <tr><td>USD</td><td> 
-       <a href="https://bank.gov.ua/ua/markets/exchangerate-chart?cn%5B%5D=USD" class="name">Доллар США</a></td><td></td></tr>
+       <a href="https://bank.gov.ua/ua/markets/exchangerate-chart?cn%5B%5D=USD" class="name">Доллар США</a></td><td><p id="first"></p></td></tr>
      <tr><td>EUR</td>
-      <td> <a href="https://bank.gov.ua/ua/markets/exchangerate-chart?cn%5B%5D=EUR" class="name">Евро</a></td><td></td></tr>
+      <td> <a href="https://bank.gov.ua/ua/markets/exchangerate-chart?cn%5B%5D=EUR" class="name">Евро</a></td><p id="second"></p><td></td></tr>
      <tr><td>RUB</td>
-      <td> <a href="https://bank.gov.ua/ua/markets/exchangerate-chart?cn%5B%5D=RUB" class="name">Русский рубль</a> </td><td></td></tr>
+      <td> <a href="https://bank.gov.ua/ua/markets/exchangerate-chart?cn%5B%5D=RUB" class="name">Русский рубль</a> </td><p id="third"></p><td></td></tr>
     </table>
     <p><a name="fourth_task"></a></p>
     <form>
@@ -112,5 +115,18 @@
         <input type="radio" name="answer" value="a3">Большой полосатый мух</p>
         <p><input type="submit"></p>
        </form>
+       
+       <script>
+        var request = new XMLHttpRequest();
+        request.open("GET", "C:\Users\bilas\Itech\new.json", false);
+        request.send(null)
+        var my_JSON_object = JSON.parse(request.responseText);
+        alert (my_JSON_object.rate[0]);
+        var text =  my_JSON_object.rate[0]
+        
+        
+        my_JSON_object.rate = eval("("+text+")"); 
+        document.getElementById("first").innerHTML = my_JSON_object.rate[0];
+      </script>
 </body>
 </html>
