@@ -103,9 +103,9 @@
      <tr><td>USD</td><td> 
        <a href="https://bank.gov.ua/ua/markets/exchangerate-chart?cn%5B%5D=USD" class="name">Доллар США</a></td><td><p id="first"></p></td></tr>
      <tr><td>EUR</td>
-      <td> <a href="https://bank.gov.ua/ua/markets/exchangerate-chart?cn%5B%5D=EUR" class="name">Евро</a></td><p id="second"></p><td></td></tr>
+      <td> <a href="https://bank.gov.ua/ua/markets/exchangerate-chart?cn%5B%5D=EUR" class="name">Евро</a></td></p><td><p id="second"></p></td></tr>
      <tr><td>RUB</td>
-      <td> <a href="https://bank.gov.ua/ua/markets/exchangerate-chart?cn%5B%5D=RUB" class="name">Русский рубль</a> </td><p id="third"></p><td></td></tr>
+      <td> <a href="https://bank.gov.ua/ua/markets/exchangerate-chart?cn%5B%5D=RUB" class="name">Русский рубль</a> </td></p><td><p id="third"></p></td></tr>
     </table>
     <p><a name="fourth_task"></a></p>
     <form>
@@ -118,15 +118,23 @@
        
        <script>
         var request = new XMLHttpRequest();
-        request.open("GET", "C:\Users\bilas\Itech\new.json", false);
+        request.open("GET", "https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json", false);
         request.send(null)
-        var my_JSON_object = JSON.parse(request.responseText);
-        alert (my_JSON_object.rate[0]);
-        var text =  my_JSON_object.rate[0]
         
+        var text = JSON.parse(request.responseText); 
+        var result = {} 
+
+        console.log(text);
+
+        for(var i = 0; i < text.length; i++) {
+        result[i] = text[i].rate;
         
-        my_JSON_object.rate = eval("("+text+")"); 
-        document.getElementById("first").innerHTML = my_JSON_object.rate[0];
+        }
+        
+        document.getElementById("first").innerHTML = result[0];
+        document.getElementById("second").innerHTML = result[2];
+        document.getElementById("third").innerHTML = result[4];
+        
       </script>
 </body>
 </html>
