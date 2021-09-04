@@ -6,7 +6,6 @@
 </head>
 <body>
 <header><h1>Лабораторная №1. Вариант №1</h1> </header>
-
 <p><a href="#first_task">Первое задание</a></p>
 <p><a href="#second_task">Второе задание</a></p>
 <p><a href="#third_task">Третье задание</a></p>
@@ -94,27 +93,21 @@
   </ul>
   <p><a name="third_task"></a></p>
     <table border="1">
-     <caption>Курс валют</caption>
+     <caption><h3>Курс валют</h3></caption>
      <tr>
       <th>Сокращение валюты</th>
       <th>Название валюты</th>
       <th>Официальный курс</th>
      </tr>
      <tr><td>USD</td><td> 
-       <a href="https://bank.gov.ua/ua/markets/exchangerate-chart?cn%5B%5D=USD" class="name">Доллар США</a></td><td><p id="first"></p></td></tr>
+       <a href="https://bank.gov.ua/ua/markets/exchangerate-chart?cn%5B%5D=USD" class="name">Долар США</a></td><td><p id="first"></p></td></tr>
      <tr><td>EUR</td>
-      <td> <a href="https://bank.gov.ua/ua/markets/exchangerate-chart?cn%5B%5D=EUR" class="name">Евро</a></td></p><td><p id="second"></p></td></tr>
+      <td> <a href="https://bank.gov.ua/ua/markets/exchangerate-chart?cn%5B%5D=EUR" class="name">Євро</a></td></p><td><p id="second"></p></td></tr>
      <tr><td>RUB</td>
-      <td> <a href="https://bank.gov.ua/ua/markets/exchangerate-chart?cn%5B%5D=RUB" class="name">Русский рубль</a> </td></p><td><p id="third"></p></td></tr>
+      <td> <a href="https://bank.gov.ua/ua/markets/exchangerate-chart?cn%5B%5D=RUB" class="name">Російський рубль</a> </td></p><td><p id="third"></p></td></tr>
     </table>
     <p><a name="fourth_task"></a></p>
-    <form>
-        <p>Предпочтение курса валют</p>
-        <p><input type="radio" name="answer" value="a1">Офицерский состав<Br>
-        <input type="radio" name="answer" value="a2">Операционная система<Br>
-        <input type="radio" name="answer" value="a3">Большой полосатый мух</p>
-        <p><input type="submit"></p>
-       </form>
+  
        
        <script>
         var request = new XMLHttpRequest();
@@ -123,18 +116,30 @@
         
         var text = JSON.parse(request.responseText); 
         var result = {} 
-
+        var USD, RUB, EUR
         console.log(text);
 
         for(var i = 0; i < text.length; i++) {
         result[i] = text[i].rate;
-        
+          if(text[i].txt == 'Російський рубль')
+            RUB = i;
+          if(text[i].txt == 'Долар США')
+            USD = i;
+          if(text[i].txt == 'Євро')
+            EUR = i; 
         }
         
-        document.getElementById("first").innerHTML = result[0];
-        document.getElementById("second").innerHTML = result[2];
-        document.getElementById("third").innerHTML = result[4];
-        
+        document.getElementById("first").innerHTML = result[USD];
+        document.getElementById("second").innerHTML = result[EUR];
+        document.getElementById("third").innerHTML = result[RUB];
       </script>
+       <form>
+        <h3>Вподобання до курсу валют</h3>
+        <p><input type="radio" name="answer" value="a1">Америкаський долар <Br>
+        <input type="radio" name="answer" value="a2">Євро<Br>
+        <input type="radio" name="answer" value="a3">Російський рубль</p>
+        <p><input type="submit"></p>
+       </form>
+       
 </body>
 </html>
